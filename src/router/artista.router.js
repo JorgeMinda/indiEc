@@ -7,14 +7,13 @@ const {
     actualizarArtista, 
     eliminarArtista 
 } = require('../controller/artista.controller');
+const isLoggedIn = require('../lib/auth');
 
-// Middleware de autenticación (opcional)
-// const isLoggedIn = require('../lib/auth');
 
-router.get('/lista', obtenerArtistas);
-router.post('/crear', crearArtista);
-router.get('/:id', obtenerArtistaPorId);
-router.put('/:id', actualizarArtista);
-router.delete('/:id', eliminarArtista);
+router.get('/lista', isLoggedIn, obtenerArtistas);
+router.post('/crear', isLoggedIn,  crearArtista);
+router.get('/:id', isLoggedIn,  obtenerArtistaPorId);
+router.put('/:id', isLoggedIn,  actualizarArtista);
+router.delete('/:id', isLoggedIn,  eliminarArtista);
 
 module.exports = router;

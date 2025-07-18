@@ -7,17 +7,18 @@ const {
     actualizarGrupo, 
     eliminarGrupo 
 } = require('../controller/grupoMusical.controller');
+const isLoggedIn = require('../lib/auth');
 
 // Obtener todos los grupos musicales
-router.get('/lista', mostrarGrupos);
+router.get('/lista', isLoggedIn, mostrarGrupos);
 
 // Crear nuevo grupo musical
-router.post('/crear', crearGrupo);
+router.post('/crear', isLoggedIn, crearGrupo);
 
 // Actualizar un grupo musical existente
-router.put('/actualizar/:id', actualizarGrupo);
+router.put('/actualizar/:id', isLoggedIn, actualizarGrupo);
 
 // Eliminar (desactivar) un grupo musical
-router.delete('/eliminar/:id', eliminarGrupo);
+router.delete('/eliminar/:id', isLoggedIn, eliminarGrupo);
 
 module.exports = router;

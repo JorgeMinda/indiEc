@@ -4,6 +4,7 @@ const { body } = require('express-validator');
 const { register, login, logout, getProfile } = require('../controller/auth.controller');
 const isLoggedIn = require('../lib/auth');
 
+
 // Validaciones
 const registerValidation = [
     body('nameUsers').notEmpty().withMessage('Name is required'),

@@ -5,10 +5,11 @@ const {
     gestionarPerfilDisquera, 
     obtenerEstadisticas 
 } = require('../controller/disquera.controller');
+const isLoggedIn = require('../lib/auth');
 
-router.get('/perfil', obtenerPerfilDisquera);
-router.post('/perfil', gestionarPerfilDisquera);
-router.put('/perfil', gestionarPerfilDisquera);
-router.get('/estadisticas', obtenerEstadisticas);
+router.get('/perfil', isLoggedIn, obtenerPerfilDisquera);
+router.post('/perfil', isLoggedIn, gestionarPerfilDisquera);
+router.put('/perfil', isLoggedIn, gestionarPerfilDisquera);
+router.get('/estadisticas', isLoggedIn, obtenerEstadisticas);
 
 module.exports = router;

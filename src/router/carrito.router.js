@@ -7,17 +7,18 @@ const {
     actualizarCarrito, 
     eliminarCarrito 
 } = require('../controller/carrito.controller');
+const isLoggedIn = require('../lib/auth');
 
 // Obtener todos los carritos
-router.get('/lista', mostrarCarritos);
+router.get('/lista', isLoggedIn, mostrarCarritos);
 
 // Crear nuevo carrito
-router.post('/crear', crearCarrito);
+router.post('/crear', isLoggedIn, crearCarrito);
 
 // Actualizar un carrito existente
-router.put('/actualizar/:id', actualizarCarrito);
+router.put('/actualizar/:id', isLoggedIn, actualizarCarrito);
 
 // Eliminar (desactivar) un carrito
-router.delete('/eliminar/:id', eliminarCarrito);
+router.delete('/eliminar/:id', isLoggedIn, eliminarCarrito);
 
 module.exports = router;

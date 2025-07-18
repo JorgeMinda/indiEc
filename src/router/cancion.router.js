@@ -5,9 +5,10 @@ const {
     crearCancion, 
     obtenerCancionesPorArtista 
 } = require('../controller/cancion.controller');
+const isLoggedIn = require('../lib/auth');
 
-router.get('/lista', obtenerCanciones);
-router.post('/crear', crearCancion);
-router.get('/artista/:artistaId', obtenerCancionesPorArtista);
+router.get('/lista', isLoggedIn, obtenerCanciones);
+router.post('/crear', isLoggedIn, crearCancion);
+router.get('/artista/:artistaId', isLoggedIn, obtenerCancionesPorArtista);
 
 module.exports = router;

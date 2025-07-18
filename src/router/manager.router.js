@@ -7,17 +7,18 @@ const {
     actualizarManager, 
     eliminarManager 
 } = require('../controller/manager.controller');
+const isLoggedIn = require('../lib/auth');
 
 // Obtener todos los managers
-router.get('/lista', mostrarManagers);
+router.get('/lista', isLoggedIn, mostrarManagers);
 
 // Crear nuevo manager
-router.post('/crear', crearManager);
+router.post('/crear', isLoggedIn, crearManager);
 
 // Actualizar un manager existente
-router.put('/actualizar/:id', actualizarManager);
+router.put('/actualizar/:id', isLoggedIn, actualizarManager);
 
 // Eliminar (desactivar) un manager
-router.delete('/eliminar/:id', eliminarManager);
+router.delete('/eliminar/:id', isLoggedIn, eliminarManager);
 
 module.exports = router;

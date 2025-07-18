@@ -6,13 +6,14 @@ const {
     asignarArtistaGrupo,
     obtenerMiembrosGrupo
 } = require('../controller/relaciones.controller');
+const isLoggedIn = require('../lib/auth');
 
 // Relaciones artista-evento
-router.post('/artista-evento', asignarArtistaEvento);
-router.get('/evento/:eventoId/artistas', obtenerArtistasEvento);
+router.post('/artista-evento', isLoggedIn, asignarArtistaEvento);
+router.get('/evento/:eventoId/artistas', isLoggedIn, obtenerArtistasEvento);
 
 // Relaciones artista-grupo
-router.post('/artista-grupo', asignarArtistaGrupo);
-router.get('/grupo/:grupoId/miembros', obtenerMiembrosGrupo);
+router.post('/artista-grupo', isLoggedIn, asignarArtistaGrupo);
+router.get('/grupo/:grupoId/miembros', isLoggedIn, obtenerMiembrosGrupo);
 
 module.exports = router;

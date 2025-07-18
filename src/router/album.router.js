@@ -4,8 +4,10 @@ const {
     obtenerAlbumes, 
     crearAlbum 
 } = require('../controller/album.controller');
+const isLoggedIn = require('../lib/auth'); 
 
-router.get('/lista', obtenerAlbumes);
-router.post('/crear', crearAlbum);
+// Rutas protegidas
+router.get('/lista', isLoggedIn, obtenerAlbumes);
+router.post('/crear', isLoggedIn, crearAlbum);
 
 module.exports = router;

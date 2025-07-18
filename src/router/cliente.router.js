@@ -7,17 +7,18 @@ const {
     actualizarCliente, 
     eliminarCliente 
 } = require('../controller/cliente.controller');
+const isLoggedIn = require('../lib/auth');
 
 // Obtener todos los clientes
-router.get('/lista', mostrarClientes);
+router.get('/lista', isLoggedIn, mostrarClientes);
 
 // Crear nuevo cliente
-router.post('/crear', crearCliente);
+router.post('/crear', isLoggedIn, crearCliente);
 
 // Actualizar un cliente existente
-router.put('/actualizar/:id', actualizarCliente);
+router.put('/actualizar/:id', isLoggedIn, actualizarCliente);
 
 // Eliminar (desactivar) un cliente
-router.delete('/eliminar/:id', eliminarCliente);
+router.delete('/eliminar/:id', isLoggedIn, eliminarCliente);
 
 module.exports = router;

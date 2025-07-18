@@ -6,19 +6,20 @@ const {
     obtenerTallas,
     inicializarDatos
 } = require('../controller/auxiliares.controller');
+const isLoggedIn = require('../lib/auth');
 
 // Rutas para géneros
-router.get('/generos', obtenerGeneros);
-router.post('/generos', crearGenero);
+router.get('/generos', isLoggedIn, obtenerGeneros);
+router.post('/generos', isLoggedIn, crearGenero);
 
 
 
 // Rutas para tallas
-router.get('/tallas', obtenerTallas);
+router.get('/tallas', isLoggedIn, obtenerTallas);
 
 
 
 // Ruta para inicializar datos básicos
-router.post('/inicializar', inicializarDatos);
+router.post('/inicializar', isLoggedIn, inicializarDatos);
 
 module.exports = router;
