@@ -19,6 +19,7 @@
     "connect": "^3.7.0",
     "connect-flash": "^0.1.1",
     "connect-mysql": "^4.0.0",
+    "connect-pg-simple": "^10.0.0",
     "cookie-parser": "^1.4.6",
     "crypto-js": "^4.2.0",
     "csurf": "^1.2.2",
@@ -42,10 +43,12 @@
     "nodemailer": "^6.10.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "sequelize": "^6.37.3",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7",
     "timeago.js": "^4.0.2",
     "toobusy-js": "^0.5.1",
-    "winston": "^3.14.2"
+    "winston": "^3.18.3"
   },
   "devDependencies": {
     "browser-sync": "^3.0.2",

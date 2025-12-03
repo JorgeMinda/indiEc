@@ -1,6 +1,8 @@
+// index.js
 const app = require('./app');
 
-const port = app.get('port');
-app.listen(port, () => {
-    console.log(`El servidor está escuchando en el puerto ${port}`);
-});
+const PORT = process.env.PORT || 9000;
+
+/*app.listen(PORT, () => {
+  console.log(`Servidor corriendo en puerto ${PORT}`);
+});*/
