@@ -15,6 +15,7 @@ authCtl.register = async (req, res, next) => {
 
         passport.authenticate('local.Signup', (err, user, info) => {
             if (err) {
+                console.error('Passport authentication error:', err);
                 return res.apiError('Internal server error', 500);
             }
             if (!user) {
@@ -24,15 +25,20 @@ authCtl.register = async (req, res, next) => {
             // Login automático después del registro
             req.logIn(user, (err) => {
                 if (err) {
+                    console.error('Login error:', err);
                     return res.apiError('Login after registration failed', 500);
                 }
+                
+                // Determinar nombre del rol
+                const roleName = user.rolId === 1 ? 'Administrador' : 'Cliente';
                 
                 return res.apiResponse({
                     user: {
                         id: user.idUser,
                         name: user.nameUsers,
                         email: user.emailUser,
-                        username: user.userName
+                        username: user.userName,
+                        role: roleName
                     },
                     token: req.sessionID
                 }, 201, 'User registered successfully');
@@ -66,13 +72,16 @@ authCtl.login = async (req, res, next) => {
                     return res.apiError('Login failed', 500);
                 }
                 
+                // Determinar nombre del rol
+                const roleName = user.rolId === 1 ? 'Administrador' : 'Cliente';
+                
                 return res.apiResponse({
                     user: {
                         id: user.idUser,
                         name: user.nameUsers,
                         email: user.emailUser,
                         username: user.userName,
-                        role: user.role
+                        role: roleName
                     },
                     token: req.sessionID
                 }, 200, 'Login successful');
@@ -108,13 +117,17 @@ authCtl.getProfile = (req, res) => {
     }
     
     const user = req.user;
+    const roleName = user.rolId === 1 ? 'Administrador' : 'Cliente';
+    
     return res.apiResponse({
         user: {
             id: user.idUser,
             name: user.nameUsers,
             email: user.emailUser,
-            username: user.userName
+            username: user.userName,
+            role: roleName
         }
     }, 200, 'Profile retrieved successfully');
 };
+
 module.exports = authCtl;

@@ -174,3 +174,91 @@
 2025-12-16 12:22:20 [INFO]: Base de datos conectada
 2025-12-16 12:22:20 [INFO]: Conexión establecida con la base de datos
 2025-12-16 12:22:57 [INFO]: Base de Datos sincronizadas
+2025-12-17 20:04:53 [INFO]: 🚀 API escuchando en http://localhost:9000
+2025-12-17 20:04:53 [INFO]: ✅ Mongoose conectado a MongoDB en: localhost
+2025-12-17 20:04:53 [INFO]: 🚀 MongoDB conectado correctamente
+2025-12-17 20:04:53 [ERROR]: No se pudo conectar a la base de datos: Access denied for user 'root'@'localhost' (using password: YES)
+2025-12-17 20:04:53 [ERROR]: Error al sincronizar la Base de Datos: SequelizeAccessDeniedError: Access denied for user 'root'@'localhost' (using password: YES)
+2025-12-17 20:04:53 [ERROR]: Error inesperado: Access denied for user 'root'@'localhost' (using password: YES)
+2025-12-17 20:05:42 [INFO]: 🚀 API escuchando en http://localhost:9000
+2025-12-17 20:05:42 [INFO]: ✅ Mongoose conectado a MongoDB en: localhost
+2025-12-17 20:05:42 [INFO]: 🚀 MongoDB conectado correctamente
+2025-12-17 20:05:42 [INFO]: Base de datos conectada
+2025-12-17 20:05:42 [INFO]: Conexión establecida con la base de datos
+2025-12-17 20:05:42 [INFO]: Base de Datos sincronizadas
+2025-12-17 20:07:26 [INFO]: 🚀 API escuchando en http://localhost:9000
+2025-12-17 20:07:26 [INFO]: Base de datos conectada
+2025-12-17 20:07:26 [INFO]: ✅ Mongoose conectado a MongoDB en: localhost
+2025-12-17 20:07:26 [INFO]: 🚀 MongoDB conectado correctamente
+2025-12-17 20:07:26 [INFO]: Conexión establecida con la base de datos
+2025-12-17 20:07:26 [INFO]: Base de Datos sincronizadas
+2025-12-17 20:34:03 [INFO]: 🚀 API escuchando en http://localhost:9000
+2025-12-17 20:34:03 [INFO]: ✅ Mongoose conectado a MongoDB en: localhost
+2025-12-17 20:34:03 [INFO]: 🚀 MongoDB conectado correctamente
+2025-12-17 20:34:03 [INFO]: Base de datos conectada
+2025-12-17 20:34:03 [INFO]: Conexión establecida con la base de datos
+2025-12-17 20:34:05 [INFO]: Base de Datos sincronizadas
+2025-12-17 20:46:24 [INFO]: 🚀 API escuchando en http://localhost:9000
+2025-12-17 20:46:24 [INFO]: ✅ Mongoose conectado a MongoDB en: localhost
+2025-12-17 20:46:24 [INFO]: 🚀 MongoDB conectado correctamente
+2025-12-17 20:46:24 [INFO]: Base de datos conectada
+2025-12-17 20:46:24 [INFO]: Conexión establecida con la base de datos
+2025-12-17 20:46:26 [INFO]: Base de Datos sincronizadas
+2025-12-17 20:48:56 [ERROR]: Registration error: SequelizeForeignKeyConstraintError: Cannot add or update a child row: a foreign key constraint fails (temp file operation failed)
+2025-12-17 20:48:56 [INFO]: [0mPOST /auth/register [31m500[0m 324.132 ms - 65[0m
+2025-12-17 21:06:57 [INFO]: 🚀 API escuchando en http://localhost:9000
+2025-12-17 21:06:58 [INFO]: Base de datos conectada
+2025-12-17 21:06:58 [INFO]: ✅ Mongoose conectado a MongoDB en: localhost
+2025-12-17 21:06:58 [INFO]: 🚀 MongoDB conectado correctamente
+2025-12-17 21:06:58 [INFO]: Conexión establecida con la base de datos
+2025-12-17 21:06:59 [INFO]: Base de Datos sincronizadas
+2025-12-17 21:08:18 [INFO]: [0mPOST /auth/register [32m201[0m 358.078 ms - 219[0m
+2025-12-17 21:08:19 [INFO]: [0mGET /auth/profile [32m200[0m 11.924 ms - 178[0m
+2025-12-17 21:08:29 [INFO]: [0mGET /auth/profile [36m304[0m 4.201 ms - -[0m
+2025-12-17 21:08:29 [INFO]: [0mGET /auth/profile [36m304[0m 3.964 ms - -[0m
+2025-12-17 21:08:32 [INFO]: [0mGET /auth/profile [36m304[0m 2.674 ms - -[0m
+2025-12-17 21:08:35 [INFO]: [0mGET /auth/profile [36m304[0m 2.831 ms - -[0m
+2025-12-17 21:08:36 [INFO]: [0mGET /auth/profile [36m304[0m 3.244 ms - -[0m
+2025-12-17 21:08:37 [INFO]: [0mGET /auth/profile [36m304[0m 3.042 ms - -[0m
+2025-12-17 21:08:38 [INFO]: [0mGET /auth/profile [36m304[0m 2.862 ms - -[0m
+2025-12-17 21:08:43 [INFO]: [0mPOST /auth/logout [32m200[0m 19.256 ms - 58[0m
+2025-12-17 21:08:46 [INFO]: [0mPOST /auth/login [32m200[0m 103.171 ms - 207[0m
+2025-12-17 21:08:46 [INFO]: [0mGET /auth/profile [36m304[0m 2.931 ms - -[0m
+2025-12-17 21:09:37 [INFO]: [0mPOST /auth/logout [32m200[0m 10.436 ms - 58[0m
+2025-12-17 21:10:12 [INFO]: [0mPOST /auth/register [32m201[0m 107.697 ms - 210[0m
+2025-12-17 21:10:18 [INFO]: [0mPOST /auth/login [32m200[0m 106.629 ms - 198[0m
+2025-12-17 21:10:26 [INFO]: [0mPOST /auth/login [32m200[0m 99.570 ms - 198[0m
+2025-12-17 21:11:33 [INFO]: [0mPOST /auth/login [32m200[0m 100.462 ms - 207[0m
+2025-12-17 21:11:33 [INFO]: [0mGET /auth/profile [36m304[0m 2.712 ms - -[0m
+2025-12-17 21:11:38 [INFO]: [0mGET /auth/profile [36m304[0m 4.030 ms - -[0m
+2025-12-17 21:11:45 [INFO]: [0mGET /auth/profile [36m304[0m 2.258 ms - -[0m
+2025-12-17 21:11:45 [INFO]: [0mGET /auth/profile [36m304[0m 2.860 ms - -[0m
+2025-12-17 21:11:46 [INFO]: [0mGET /auth/profile [36m304[0m 2.137 ms - -[0m
+2025-12-17 21:11:47 [INFO]: [0mGET /auth/profile [36m304[0m 2.624 ms - -[0m
+2025-12-17 21:11:48 [INFO]: [0mGET /auth/profile [36m304[0m 2.111 ms - -[0m
+2025-12-17 21:11:49 [INFO]: [0mGET /auth/profile [36m304[0m 2.143 ms - -[0m
+2025-12-17 21:12:27 [INFO]: [0mGET /auth/profile [36m304[0m 3.335 ms - -[0m
+2025-12-17 21:12:27 [INFO]: [0mGET /auth/profile [36m304[0m 1.947 ms - -[0m
+2025-12-17 21:12:29 [INFO]: [0mGET /auth/profile [36m304[0m 2.419 ms - -[0m
+2025-12-17 21:12:59 [INFO]: [0mGET /auth/profile [36m304[0m 2.460 ms - -[0m
+2025-12-17 21:13:00 [INFO]: [0mGET /auth/profile [36m304[0m 2.406 ms - -[0m
+2025-12-17 21:13:00 [INFO]: [0mGET /auth/profile [36m304[0m 1.960 ms - -[0m
+2025-12-17 21:13:02 [INFO]: [0mGET /auth/profile [36m304[0m 3.367 ms - -[0m
+2025-12-17 21:14:49 [INFO]: [0mGET /auth/profile [36m304[0m 2.051 ms - -[0m
+2025-12-17 21:15:22 [INFO]: [0mPOST /auth/logout [32m200[0m 10.169 ms - 58[0m
+2025-12-17 21:15:25 [INFO]: [0mPOST /auth/login [32m200[0m 96.811 ms - 198[0m
+2025-12-17 21:15:29 [INFO]: [0mPOST /auth/logout [32m200[0m 9.492 ms - 58[0m
+2025-12-17 21:15:35 [INFO]: [0mPOST /auth/login [32m200[0m 101.246 ms - 207[0m
+2025-12-17 21:15:35 [INFO]: [0mGET /auth/profile [36m304[0m 7.299 ms - -[0m
+2025-12-17 21:15:37 [INFO]: [0mGET /auth/profile [36m304[0m 2.508 ms - -[0m
+2025-12-17 21:15:37 [INFO]: [0mGET /auth/profile [36m304[0m 2.866 ms - -[0m
+2025-12-17 21:15:38 [INFO]: [0mGET /auth/profile [36m304[0m 3.106 ms - -[0m
+2025-12-17 21:15:41 [INFO]: [0mGET /auth/profile [36m304[0m 2.079 ms - -[0m
+2025-12-17 21:18:28 [INFO]: [0mGET /auth/profile [36m304[0m 2.117 ms - -[0m
+2025-12-17 21:18:28 [INFO]: [0mGET /auth/profile [36m304[0m 2.238 ms - -[0m
+2025-12-17 21:18:28 [INFO]: [0mGET /auth/profile [36m304[0m 1.900 ms - -[0m
+2025-12-17 21:18:29 [INFO]: [0mGET /auth/profile [36m304[0m 3.335 ms - -[0m
+2025-12-17 21:18:30 [INFO]: [0mGET /auth/profile [36m304[0m 2.064 ms - -[0m
+2025-12-17 21:18:30 [INFO]: [0mGET /auth/profile [36m304[0m 2.722 ms - -[0m
+2025-12-17 21:18:30 [INFO]: [0mGET /auth/profile [36m304[0m 2.080 ms - -[0m
+2025-12-17 21:18:31 [INFO]: [0mGET /auth/profile [36m304[0m 2.567 ms - -[0m
