@@ -2,8 +2,7 @@ const artistaService = require('../../../domain/services/artista/artista.service
 
 class EliminarArtistaUseCase {
     async execute(id) {
-        return await artistaService.eliminarArtistaSql(id);
-        // return await artistaService.eliminarArtistaMongo(id); // TODO: Crear este archivo
+        return await artistaService.eliminarArtista(id);
     }
 }
 

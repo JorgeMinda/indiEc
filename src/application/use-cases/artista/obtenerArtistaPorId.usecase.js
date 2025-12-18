@@ -2,7 +2,7 @@ const artistaService = require('../../../domain/services/artista/artista.service
 
 class ObtenerArtistaPorIdUseCase {
     async execute(id) {
-        return await artistaService.obtenerArtistaPorIdSql(id);
+        return await artistaService.obtenerArtistaPorId(id);
     }
 }
 

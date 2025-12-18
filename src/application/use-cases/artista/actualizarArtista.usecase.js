@@ -2,8 +2,7 @@ const artistaService = require('../../../domain/services/artista/artista.service
 
 class ActualizarArtistaUseCase {
     async execute(id, datos) {
-        return await artistaService.actualizarArtistaSql(id, datos);
-        // return await artistaService.actualizarArtistaMongo(id, datos); // TODO: Crear este archivo  
+        return await artistaService.actualizarArtista(id, datos);
     }
 }
 

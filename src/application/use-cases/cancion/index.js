@@ -1,19 +1,29 @@
-const CancionService = require('../../../domain/services/cancion/cancion.service.js');
+const cancionService = require('../../../domain/services/cancion/cancion.service');
 
 const obtenerCancionesUC = async () => {
-    return await CancionService.obtenerCancionesSql();
+    return await cancionService.obtenerCanciones();
+};
+
+const obtenerCancionesPorArtistaUC = async (idArtista) => {
+    return await cancionService.obtenerCancionesPorArtista(idArtista);
 };
 
 const crearCancionUC = async (req) => {
-    return await CancionService.crearCancionSql(req);
+    return await cancionService.crearCancion(req.body);
 };
 
-const obtenerCancionesPorArtistaUC = async (id) => {
-    return await CancionService.obtenerCancionesPorArtistaSql(id);
+const actualizarCancionUC = async (id, datos) => {
+    return await cancionService.actualizarCancion(id, datos);
+};
+
+const eliminarCancionUC = async (id) => {
+    return await cancionService.eliminarCancion(id);
 };
 
 module.exports = {
     obtenerCancionesUC,
+    obtenerCancionesPorArtistaUC,
     crearCancionUC,
-    obtenerCancionesPorArtistaUC
+    actualizarCancionUC,
+    eliminarCancionUC
 };

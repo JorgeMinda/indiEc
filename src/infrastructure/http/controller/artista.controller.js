@@ -3,6 +3,7 @@ const crearArtista = require('../../../application/use-cases/artista/crearArtist
 const obtenerArtistaPorId = require('../../../application/use-cases/artista/obtenerArtistaPorId.usecase');
 const actualizarArtista = require('../../../application/use-cases/artista/actualizarArtista.usecase');
 const eliminarArtista = require('../../../application/use-cases/artista/eliminarArtista.usecase');
+const artistaService = require('../../../domain/services/artista/artista.service');
 
 const artistaCtl = {};
 
@@ -35,8 +36,8 @@ artistaCtl.obtenerArtistaPorId = async (req, res) => {
 
 artistaCtl.actualizarArtista = async (req, res) => {
     try {
-        await actualizarArtista.execute(req.params.id, req.body);
-        return res.apiResponse(null, 200, 'Artista actualizado exitosamente');
+        const data = await actualizarArtista.execute(req.params.id, req.body);
+        return res.apiResponse(data, 200, 'Artista actualizado exitosamente');
     } catch (error) {
         return res.apiError(error.message, 500);
     }
@@ -44,8 +45,21 @@ artistaCtl.actualizarArtista = async (req, res) => {
 
 artistaCtl.eliminarArtista = async (req, res) => {
     try {
-        await eliminarArtista.execute(req.params.id);
-        return res.apiResponse(null, 200, 'Artista eliminado exitosamente');
+        const data = await eliminarArtista.execute(req.params.id);
+        return res.apiResponse(data, 200, 'Artista eliminado exitosamente');
+    } catch (error) {
+        return res.apiError(error.message, 500);
+    }
+};
+
+// NUEVO - Subir foto
+artistaCtl.subirFoto = async (req, res) => {
+    try {
+        if (!req.files || !req.files.photo) {
+            return res.apiError('No se proporcionó ninguna imagen', 400);
+        }
+        const data = await artistaService.subirFoto(req.params.id, req.files.photo);
+        return res.apiResponse(data, 200, 'Foto actualizada exitosamente');
     } catch (error) {
         return res.apiError(error.message, 500);
     }
