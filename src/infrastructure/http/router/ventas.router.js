@@ -4,7 +4,7 @@ const {
     registrarVenta, 
     obtenerReporteVentas 
 } = require('../controller/ventas.controller');
-const isLoggedIn = require('../../lib/auth');
+const isLoggedIn = require('../../../application/use-cases/auth/auth.js');
 
 router.post('/registrar', isLoggedIn, registrarVenta);
 router.get('/reporte', isLoggedIn, obtenerReporteVentas);

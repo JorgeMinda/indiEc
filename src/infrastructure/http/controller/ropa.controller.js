@@ -1,103 +1,45 @@
+const obtenerRopa = require('../../../application/use-cases/ropa/ObtenerRopa.usecase.js');
+const crearRopa = require('../../../application/use-cases/ropa/CrearRopa.usecase.js');
+const actualizarRopa = require('../../../application/use-cases/ropa/ActualizarRopa.usecase.js');
+const eliminarRopa = require('../../../application/use-cases/ropa/EliminarRopa.usecase.js');
+
 const ropaCtl = {};
-const orm = require('../../database/connection/dataBase.orm')
-const sql = require('../../database/connection/dataBase.sql')
-const mongo = require('../../database/connection/dataBaseMongose')
-const { descifrarDatos, cifrarDatos } = require('../../../application/auth/encrypDates');
 
-function safeDecrypt(data) {
-    try {
-        return descifrarDatos(data);
-    } catch (error) {
-        console.error('Error al descifrar datos:', error.message);
-        return ''; // Devolver una cadena vacía si ocurre un error
-    }
-}
-
-// Mostrar toda la ropa
 ropaCtl.mostrarRopa = async (req, res) => {
     try {
-        const [listaRopa] = await sql.promise().query('SELECT * FROM ropas');
-        return res.json(listaRopa);
+        const data = await obtenerRopa();
+        return res.apiResponse(data, 200, 'Ropa obtenida correctamente');
     } catch (error) {
-        console.error('Error al mostrar ropa:', error);
-        return res.status(500).json({ message: 'Error al obtener la ropa', error: error.message });
+        return res.apiError(error.message, 500);
     }
 };
 
-// Crear nueva ropa
 ropaCtl.crearRopa = async (req, res) => {
     try {
-        const { nombre, artista, tipo, talla } = req.body;
-
-        // Validar que los campos requeridos no estén vacíos
-        if (!nombre || !artista || !tipo || !talla) {
-            return res.status(400).json({ message: 'Todos los campos son requeridos' });
-        }
-
-        const envioSQL = {
-            nombre,
-            artista,
-            tipo,
-            talla,
-            estado : 'activo',
-            createRopa: new Date().toLocaleString()
-        };
-
-        const nuevaRopa = await orm.ropa.create(envioSQL);
-        return res.status(201).json({ message: 'Éxito al guardar', idRopa: nuevaRopa.idRopa });
+        const data = await crearRopa(req.body);
+        return res.apiResponse(data, 201, 'Ropa creada exitosamente');
     } catch (error) {
-        console.error('Error al crear ropa:', error);
-        return res.status(500).json({ message: 'Error al guardar la ropa', error: error.message });
+        return res.apiError(error.message, 500);
     }
 };
 
-// Actualizar ropa
 ropaCtl.actualizarRopa = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, artista, tipo, talla } = req.body;
-
-        // Validar que los campos requeridos no estén vacíos
-        if (!nombre || !artista || !tipo || !talla) {
-            return res.status(400).json({ message: 'Todos los campos son requeridos' });
-        }
-
-        const [result] = await sql.promise().query(`
-            UPDATE ropas 
-            SET nombre = ?, artista = ?, tipo = ?, talla = ?, updateRopa = ?
-            WHERE idRopa = ?
-        `, [nombre, artista, tipo, talla, new Date().toLocaleString(), id]);
-
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Ropa no encontrada' });
-        }
-
-        return res.json({ message: 'Ropa actualizada exitosamente' });
+        const data = await actualizarRopa(id, req.body);
+        return res.apiResponse(data, 200, 'Ropa actualizada exitosamente');
     } catch (error) {
-        console.error('Error al actualizar ropa:', error);
-        return res.status(500).json({ message: 'Error al actualizar la ropa', error: error.message });
+        return res.apiError(error.message, 500);
     }
 };
 
-// Eliminar ropa (cambiar estado a inactivo)
 ropaCtl.eliminarRopa = async (req, res) => {
     try {
         const { id } = req.params;
-
-        const [result] = await sql.promise().query(`
-            UPDATE ropas 
-            SET estado = 'inactivo', updateRopa = ?
-            WHERE idRopa = ?
-        `, [new Date().toLocaleString(), id]);
-
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Ropa no encontrada' });
-        }
-
-        return res.json({ message: 'Ropa eliminada exitosamente' });
+        const data = await eliminarRopa(id);
+        return res.apiResponse(data, 200, 'Ropa eliminada exitosamente');
     } catch (error) {
-        console.error('Error al eliminar ropa:', error);
-        return res.status(500).json({ message: 'Error al eliminar la ropa', error: error.message });
+        return res.apiError(error.message, 500);
     }
 };
 

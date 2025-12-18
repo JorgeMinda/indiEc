@@ -7,7 +7,7 @@ const {
     actualizarCarrito, 
     eliminarCarrito 
 } = require('../controller/carrito.controller');
-const isLoggedIn = require('../../lib/auth');
+const isLoggedIn = require('../../../application/use-cases/auth/auth.js');
 
 // Obtener todos los carritos
 router.get('/lista', isLoggedIn, mostrarCarritos);

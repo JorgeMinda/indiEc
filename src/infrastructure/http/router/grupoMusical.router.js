@@ -7,7 +7,7 @@ const {
     actualizarGrupo, 
     eliminarGrupo 
 } = require('../controller/grupoMusical.controller');
-const isLoggedIn = require('../../lib/auth');
+const isLoggedIn = require('../../../application/use-cases/auth/auth.js');
 
 // Obtener todos los grupos musicales
 router.get('/lista', isLoggedIn, mostrarGrupos);

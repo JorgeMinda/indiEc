@@ -6,7 +6,7 @@ const {
     asignarArtistaGrupo,
     obtenerMiembrosGrupo
 } = require('../controller/relaciones.controller');
-const isLoggedIn = require('../../lib/auth');
+const isLoggedIn = require('../../../application/use-cases/auth/auth.js');
 
 // Relaciones artista-evento
 router.post('/artista-evento', isLoggedIn, asignarArtistaEvento);

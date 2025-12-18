@@ -32,10 +32,11 @@ app.set('port', process.env.PORT || 9000);
 
 // Habilitar CORS (configura según tus necesidades)
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
-  credentials: true
+
+        origin: "http://localhost:5173",
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
 }));
 
 // ==================== CONFIGURACIÓN DE LOGS MEJORADA ====================
@@ -97,14 +98,14 @@ app.use(morgan(morganFormat, {
 // ==================== CONFIGURACIÓN DE SEGURIDAD MEJORADA ====================
 
 // 4. Middleware de protección contra sobrecarga del servidor
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     if (toobusy()) {
         logger.warn('Server too busy!');
         res.status(503).json({ error: 'Server too busy. Please try again later.' });
     } else {
         next();
     }
-});
+});*/
 
 // 5. Configuración de Helmet
 app.use(helmet());
@@ -134,8 +135,8 @@ app.use(cookieParser(
     process.env.COOKIE_SECRET || crypto.randomBytes(64).toString('hex'),
     {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
+        sameSite: 'lax',
+secure: false,
         maxAge: 24 * 60 * 60 * 1000
     }
 ));
@@ -247,22 +248,30 @@ app.use((req, res, next) => {
 
 // ==================== RUTAS API ====================
 // Importar y configurar rutas como API
-app.use(require('../src/infrastructure/http/router/index'))
-app.use(require('../src/infrastructure/http/router/pagina.router'))
-app.use(require('../src/infrastructure/http/router/artista.router'))
-app.use(require('../src/infrastructure/http/router/cancion.router'))
-app.use(require('../src/infrastructure/http/router/album.router'))
-app.use(require('../src/infrastructure/http/router/disquera.router'))
-app.use(require('../src/infrastructure/http/router/evento.router'))
-app.use(require('../src/infrastructure/http/router/ventas.router'))
-app.use(require('../src/infrastructure/http/router/ropa.router'))
-app.use(require('../src/infrastructure/http/router/carrito.router'))
-app.use(require('../src/infrastructure/http/router/cliente.router'))
-app.use(require('../src/infrastructure/http/router/grupoMusical.router'))
-app.use(require('../src/infrastructure/http/router/manager.router'))
-app.use(require('../src/infrastructure/http/router/auxiliares.router'))
-app.use(require('../src/infrastructure/http/router/relaciones.router'))
-app.use(require('../src/infrastructure/http/router/auth.router'))    
+// Rutas base / home
+app.use('/', require('../src/infrastructure/http/router/index'));
+
+// Módulos principales
+app.use('/page', require('../src/infrastructure/http/router/page.router'));
+app.use('/artista', require('../src/infrastructure/http/router/artista.router'));
+app.use('/cancion', require('../src/infrastructure/http/router/cancion.router'));
+app.use('/album', require('../src/infrastructure/http/router/album.router'));
+app.use('/disquera', require('../src/infrastructure/http/router/disquera.router'));
+app.use('/evento', require('../src/infrastructure/http/router/evento.router'));
+app.use('/ventas', require('../src/infrastructure/http/router/ventas.router'));
+app.use('/ropa', require('../src/infrastructure/http/router/ropa.router'));
+app.use('/carrito', require('../src/infrastructure/http/router/carrito.router'));
+app.use('/cliente', require('../src/infrastructure/http/router/cliente.router'));
+app.use('/grupo-musical', require('../src/infrastructure/http/router/grupoMusical.router'));
+app.use('/manager', require('../src/infrastructure/http/router/manager.router'));
+
+// Auxiliares / relaciones
+app.use('/auxiliares', require('../src/infrastructure/http/router/auxiliares.router'));
+app.use('/relaciones', require('../src/infrastructure/http/router/relaciones.router'));
+
+// Auth (ya lo tenías bien)
+app.use('/auth', require('../src/infrastructure/http/router/auth.router'));
+
 
 // Configurar variables globales
 app.use((req, res, next) => {

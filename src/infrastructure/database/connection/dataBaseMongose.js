@@ -49,15 +49,15 @@ process.on('SIGINT', async () => {
 connectDB();
 
 // 5. Exportar modelos (ajusta las rutas según tu estructura)
-const pageModel = require('../../../domain/models/mongo/page');
-const artistaModel = require('../../../domain/models/mongo/artista');
-const cancionModel = require('../../../domain/models/mongo/cancion');
-const albumModel = require('../../../domain/models/mongo/album');
-const grupoMusicalModel = require('../../../domain/models/mongo/grupoMusical');
-const managerModel = require('../../../domain/models/mongo/manager');
-const eventoModel = require('../../../domain/models/mongo/evento');
-const perfilDisqueraModel = require('../../../domain/models/mongo/perfilDisquera');
-const clienteModel = require('../../../domain/models/mongo/cliente');
+const pageModel = require('../mongo/page');
+const artistaModel = require('../mongo/artista');
+const cancionModel = require('../mongo/cancion');
+const albumModel = require('../mongo/album');
+const grupoMusicalModel = require('../mongo/grupoMusical');
+const managerModel = require('../mongo/manager');
+const eventoModel = require('../mongo/evento');
+const perfilDisqueraModel = require('../mongo/perfilDisquera');
+const clienteModel = require('../mongo/cliente');
 
 module.exports = {
   pageModel,

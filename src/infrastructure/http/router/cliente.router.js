@@ -1,24 +1,16 @@
 const express = require('express');
 const router = express.Router();
-
+const authorize = require('../../../application/use-cases/auth/authorize');
 const { 
     mostrarClientes, 
     crearCliente, 
     actualizarCliente, 
     eliminarCliente 
 } = require('../controller/cliente.controller');
-const isLoggedIn = require('../../lib/auth');
+const isLoggedIn = require('../../../application/use-cases/auth/auth.js');
 
-// Obtener todos los clientes
-router.get('/lista', isLoggedIn, mostrarClientes);
-
-// Crear nuevo cliente
-router.post('/crear', isLoggedIn, crearCliente);
-
-// Actualizar un cliente existente
-router.put('/actualizar/:id', isLoggedIn, actualizarCliente);
-
-// Eliminar (desactivar) un cliente
-router.delete('/eliminar/:id', isLoggedIn, eliminarCliente);
-
+router.get('/lista', isLoggedIn, authorize(['Administrador']), mostrarClientes);
+router.post('/crear', isLoggedIn, authorize(['Administrador']), crearCliente);
+router.put('/actualizar/:id', isLoggedIn, authorize(['Administrador']), actualizarCliente);
+router.delete('/eliminar/:id', isLoggedIn, authorize(['Administrador']), eliminarCliente);
 module.exports = router;

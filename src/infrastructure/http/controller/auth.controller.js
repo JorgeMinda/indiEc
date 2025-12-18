@@ -71,7 +71,8 @@ authCtl.login = async (req, res, next) => {
                         id: user.idUser,
                         name: user.nameUsers,
                         email: user.emailUser,
-                        username: user.userName
+                        username: user.userName,
+                        role: user.role
                     },
                     token: req.sessionID
                 }, 200, 'Login successful');
@@ -116,5 +117,4 @@ authCtl.getProfile = (req, res) => {
         }
     }, 200, 'Profile retrieved successfully');
 };
-
 module.exports = authCtl;

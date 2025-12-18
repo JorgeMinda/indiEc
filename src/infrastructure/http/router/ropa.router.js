@@ -7,7 +7,7 @@ const {
     actualizarRopa,
     eliminarRopa 
 } = require('../controller/ropa.controller');
-const isLoggedIn = require('../../lib/auth');
+const isLoggedIn = require('../../../application/use-cases/auth/auth.js');
 
 // Obtener todas las prendas de ropa
 router.get('/lista', isLoggedIn, mostrarRopa);

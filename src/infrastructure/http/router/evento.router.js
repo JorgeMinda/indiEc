@@ -4,7 +4,7 @@ const {
     obtenerEventos, 
     crearEvento 
 } = require('../controller/evento.controller');
-const isLoggedIn = require('../../lib/auth');
+const isLoggedIn = require('../../../application/use-cases/auth/auth.js');
 
 router.get('/lista', isLoggedIn, obtenerEventos);
 router.post('/crear', isLoggedIn, crearEvento);

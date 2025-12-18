@@ -58,26 +58,26 @@ sequelize.sync(syncOptions)
     });
 
 //extracionModelos
-const usuarioModel = require('../../../domain/models/sql/usuario')
-const rolModel = require('../../../domain/models/sql/rol')
-const detalleRolModel = require('../../../domain/models/sql/detalleRol')
-const pageModel = require('../../../domain/models/sql/page')
-const artistaModel = require('../../../domain/models/sql/artista');
-const cancionModel = require('../../../domain/models/sql/cancion');
-const albumModel = require('../../../domain/models/sql/album');
-const grupoMusicalModel = require('../../../domain/models/sql/grupoMusical');
-const managerModel = require('../../../domain/models/sql/manager');
-const eventoModel = require('../../../domain/models/sql/evento');
-const perfilDisqueraModel = require('../../../domain/models/sql/perfilDisquera');
-const gestionArtistasModel = require('../../../domain/models/sql/gestionArtistas');
-const registroVentasModel = require('../../../domain/models/sql/registroVentas');
-const clienteModel = require('../../../domain/models/sql/cliente');
-const ropaModel = require('../../../domain/models/sql/ropa');
-const carritoModel = require('../../../domain/models/sql/carrito');
-const artista_EventoModel = require("../../../domain/models/sql/artista_evento");
-const generoModel = require("../../../domain/models/sql/genero");
-const tallaModel = require("../../../domain/models/sql/talla");
-const estadoModel = require("../../../domain/models/sql/estado");
+const usuarioModel = require('../../../infrastructure/database/sql/usuario')
+const rolModel = require('../../../infrastructure/database/sql/rol')
+const detalleRolModel = require('../../../infrastructure/database/sql/detalleRol')
+const pageModel = require('../../../infrastructure/database/sql/page')
+const artistaModel = require('../../../infrastructure/database/sql/artista');
+const cancionModel = require('../../../infrastructure/database/sql/cancion');
+const albumModel = require('../../../infrastructure/database/sql/album');
+const grupoMusicalModel = require('../../../infrastructure/database/sql/grupoMusical');
+const managerModel = require('../../../infrastructure/database/sql/manager');
+const eventoModel = require('../../../infrastructure/database/sql/evento');
+const perfilDisqueraModel = require('../../../infrastructure/database/sql/perfilDisquera');
+const gestionArtistasModel = require('../../../infrastructure/database/sql/gestionArtistas');
+const registroVentasModel = require('../../../infrastructure/database/sql/registroVentas');
+const clienteModel = require('../../../infrastructure/database/sql/cliente');
+const ropaModel = require('../../../infrastructure/database/sql/ropa');
+const carritoModel = require('../../../infrastructure/database/sql/carrito');
+const artista_EventoModel = require("../../../infrastructure/database/sql/artista_evento");
+const generoModel = require("../../../infrastructure/database/sql/genero");
+const tallaModel = require("../../../infrastructure/database/sql/talla");
+const estadoModel = require("../../../infrastructure/database/sql/estado");
 
 //intaciar los modelos a sincronizar
 const usuario = usuarioModel(sequelize, Sequelize)

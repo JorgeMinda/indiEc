@@ -1,92 +1,43 @@
+const obtenerCarritos = require('../../../application/use-cases/carrito/obtenerCarritos.usecase');
+const crearCarrito = require('../../../application/use-cases/carrito/crearCarrito.usecase');
+const actualizarCarrito = require('../../../application/use-cases/carrito/actualizarCarrito.usecase');
+const eliminarCarrito = require('../../../application/use-cases/carrito/eliminarCarrito.usecase');
+
 const carritoCtl = {};
 
-const orm = require('../../database/connection/dataBase.orm')
-const sql = require('../../database/connection/dataBase.sql')
-
-// Mostrar todos los carritos
 carritoCtl.mostrarCarritos = async (req, res) => {
     try {
-        const [listaCarritos] = await sql.promise().query('SELECT * FROM carritos WHERE estado = "activo"');
-        return res.json(listaCarritos);
-    } catch (error) {
-        console.error('Error al mostrar carritos:', error);
-        return res.status(500).json({ message: 'Error al obtener los carritos', error: error.message });
+        const data = await obtenerCarritos();
+        res.json(data);
+    } catch (e) {
+        res.status(500).json({ message: e.message });
     }
 };
 
-// Crear nuevo carrito
 carritoCtl.crearCarrito = async (req, res) => {
     try {
-        const { producto, tipoProducto, cantidad } = req.body;
-
-        // Validar que los campos requeridos no estén vacíos
-        if (!producto || !tipoProducto || !cantidad) {
-            return res.status(400).json({ message: 'Todos los campos son requeridos' });
-        }
-
-        const envioSQL = {
-            producto,
-            tipoProducto,
-            cantidad,
-            estado: 'activo',
-            createCarrito: new Date().toLocaleString(),
-        };
-
-        const nuevoCarrito = await orm.carrito.create(envioSQL);
-        return res.status(201).json({ message: 'Éxito al guardar', idCarrito: nuevoCarrito.idCarrito });
-    } catch (error) {
-        console.error('Error al crear carrito:', error);
-        return res.status(500).json({ message: 'Error al guardar el carrito', error: error.message });
+        const nuevo = await crearCarrito(req.body);
+        res.status(201).json({ message: 'Éxito al guardar', idCarrito: nuevo.idCarrito });
+    } catch (e) {
+        res.status(400).json({ message: e.message });
     }
 };
 
-// Actualizar carrito
 carritoCtl.actualizarCarrito = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { producto, tipoProducto, cantidad } = req.body;
-
-        // Validar que los campos requeridos no estén vacíos
-        if (!producto || !tipoProducto || !cantidad) {
-            return res.status(400).json({ message: 'Todos los campos son requeridos' });
-        }
-
-        const [result] = await sql.promise().query(`
-            UPDATE carritos 
-            SET producto = ?, tipoProducto = ?, cantidad = ?, updateCarrito = ?
-            WHERE idCarrito = ?
-        `, [producto, tipoProducto, cantidad, new Date().toLocaleString(), id]);
-
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Carrito no encontrado' });
-        }
-
-        return res.json({ message: 'Carrito actualizado exitosamente' });
-    } catch (error) {
-        console.error('Error al actualizar carrito:', error);
-        return res.status(500).json({ message: 'Error al actualizar el carrito', error: error.message });
+        await actualizarCarrito(req.params.id, req.body);
+        res.json({ message: 'Carrito actualizado' });
+    } catch (e) {
+        res.status(400).json({ message: e.message });
     }
 };
 
-// Eliminar carrito (cambiar estado a inactivo)
 carritoCtl.eliminarCarrito = async (req, res) => {
     try {
-        const { id } = req.params;
-
-        const [result] = await sql.promise().query(`
-            UPDATE carritos 
-            SET estado = 'inactivo', updateCarrito = ?
-            WHERE idCarrito = ?
-        `, [new Date().toLocaleString(), id]);
-
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Carrito no encontrado' });
-        }
-
-        return res.json({ message: 'Carrito eliminado exitosamente' });
-    } catch (error) {
-        console.error('Error al eliminar carrito:', error);
-        return res.status(500).json({ message: 'Error al eliminar el carrito', error: error.message });
+        await eliminarCarrito(req.params.id);
+        res.json({ message: 'Carrito eliminado' });
+    } catch (e) {
+        res.status(400).json({ message: e.message });
     }
 };
 

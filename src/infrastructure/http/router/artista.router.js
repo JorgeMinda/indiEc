@@ -7,7 +7,7 @@ const {
     actualizarArtista, 
     eliminarArtista 
 } = require('../controller/artista.controller');
-const isLoggedIn = require('../../lib/auth');
+const isLoggedIn = require('../../../application/use-cases/auth/auth.js');
 
 
 router.get('/lista', isLoggedIn, obtenerArtistas);

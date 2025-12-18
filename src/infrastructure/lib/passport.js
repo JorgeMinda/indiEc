@@ -4,8 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const FormData = require('form-data');
-const { cifrarDatos, descifrarDatos } = require('../../application/auth/encrypDates');
-
+const { cifrarDatos, descifrarDatos } = require('../../application/use-cases/auth/encrypDates');
+const bcrypt = require('bcrypt');
 //archvios de coneccion
 const orm = require('../../infrastructure/database/connection/dataBase.orm');
 const sql = require('../../infrastructure/database/connection/dataBase.sql');
@@ -64,14 +64,17 @@ passport.use(
     'local.Signup',
     new LocalStrategy(
         {
-            usernameField: 'userName',
-            passwordField: 'passwordUser',
+            usernameField: 'username',     // ← Coincide con el frontend y validaciones
+            passwordField: 'password',     // ← Coincide con el frontend y validaciones
             passReqToCallback: true,
         },
-        async (req, userName, passwordUser, done) => {
+        async (req, username, password, done) => {
             try {
-                // Verificar si el usuario ya existe
-                const [existingUsers] = await sql.promise().query('SELECT * FROM users WHERE userName = ? OR emailUser = ?', [userName, req.body.emailUser]);
+                // Verificar si el usuario ya existe (usamos username que llega del body)
+                const [existingUsers] = await sql.promise().query(
+                    'SELECT * FROM users WHERE userName = ? OR emailUser = ?',
+                    [username, req.body.emailUser]
+                );
                 
                 if (existingUsers.length > 0) {
                     return done(null, false, { message: 'Username or email already exists' });
@@ -79,24 +82,38 @@ passport.use(
 
                 const {
                     nameUsers,
-                    phoneUser,
+                    phoneUser = '',
                     emailUser
                 } = req.body;
 
-                // Crear nuevo usuario usando ORM
+                // Mapear rol legible a ID de rol en base de datos
+                const roleMap = {
+                    'Administrador': 1,  // Ajusta según tus IDs reales
+                    'Cliente': 2
+                };
+
+                const selectedRole = req.body.role || 'Cliente';
+                const rolId = roleMap[selectedRole] || 2;  // Por defecto Cliente
+
+                // Hashear contraseña antes de guardar
+                const hashedPassword = await bcrypt.hash(password, 10);
+
+                // Crear nuevo usuario - usamos los nombres reales de la tabla
                 const newUser = {
                     nameUsers,
                     phoneUser,
                     emailUser,
-                    passwordUser, // En producción, usar bcrypt
-                    userName,
+                    passwordUser: hashedPassword,
+                    userName: username,
                     stateUser: 'active',
-                    createUser: new Date().toLocaleString()
+                    createUser: new Date().toLocaleString(),
+                    rolId
                 };
 
                 const savedUser = await orm.usuario.create(newUser);
                 newUser.idUser = savedUser.dataValues.idUser;
-                
+                newUser.rolId = rolId;
+
                 return done(null, newUser);
                 
             } catch (error) {
@@ -125,13 +142,15 @@ passport.use(
                 }
                 
                 const user = users[0];
-                
-                // Aquí deberías comparar con bcrypt si las contraseñas están hasheadas
-                if (password === user.passwordUser) {
+
+                // Comparar contraseña hasheada con bcrypt
+                const validPassword = await bcrypt.compare(password, user.passwordUser);
+
+                if (validPassword) {
                     return done(null, user);
-                } else {
-                    return done(null, false, { message: "Incorrect password" });
                 }
+
+                return done(null, false, { message: "Incorrect password" });
             } catch (error) {
                 return done(error);
             }
@@ -184,8 +203,7 @@ passport.use(
             }
             return done(null, false, req.flash("message", "El nombre de usuario no existe."));
         }
-    )
-);
+    ));
 
 passport.use(
     'local.studentSignup',
